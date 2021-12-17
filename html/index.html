@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script defer src="../script/index.js"></script> -->
+</head>
+<body>
+    <header id="header"></header>
+    <main id="main">tt</main>
+    <footer data-include-path="footer.html"></footer>
+    
+    <script type="text/javascript">
+
+        function includeHTML(containerId, urlHTML) {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4) {
+                if (xhttp.status == 0) {
+                    console.log("---console.log 0---");
+                    document.querySelector(containerId).innerHTML = xhttp.responseText;
+                }
+                if (xhttp.status == 200) { 
+                    console.log("---console.log 200---");
+                    document.querySelector(containerId).innerHTML = xhttp.responseText;
+                }
+                if (xhttp.status == 403) {
+                    console.log("---console.log 403---");
+                }
+                if (xhttp.status == 404) {
+                    console.log("---console.log 404---");
+                    
+                    divContainer.innerHTML = "Page not found."; 
+                }
+                if (xhttp.status == 500) {
+                    console.log("---console.log 500---");
+                }
+            }
+            else
+            {
+                console.log(xhttp.readyState+"@@");
+            }
+        }
+        
+        xhttp.open("GET", urlHTML, true);
+        xhttp.send();
+    }
+
+    window.addEventListener('load', function() {
+
+        let exChangeURL = "https:\\\\www.koreaexim.go.kr\\site\\program\\financial\\exchangeJSON?authkey=8GBxeaXYXXH4WBKoRt3edSdITyLEdZZ5&searchdate=20211217&data=AP01"
+
+        //let urlHeader = "C:/mhh/projects/popol/html/header.html";
+        //console.log(urlHeader+"@@");
+        includeHTML('header', exChangeURL);
+        // includeHTML(document.querySelector('#main'), './main.html');
+        // includeHTML(document.querySelector('#footer'), './footer.html');    
+    });
+    </script>
+</body>
+</html>
